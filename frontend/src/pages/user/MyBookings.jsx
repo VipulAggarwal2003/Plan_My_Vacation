@@ -105,14 +105,14 @@ const MyBookings = () => {
                 <p>{booking?.buyer?.username}</p>
                 <p>{booking?.buyer?.email}</p>
                 <p>{booking?.date}</p>
-                <button
+                {/* <button
                   onClick={() => {
                     handleCancel(booking._id);
                   }}
                   className="p-2 rounded bg-red-600 text-white hover:opacity-95"
                 >
                   Cancel
-                </button>
+                </button> */}
               </div>
             );
           })}

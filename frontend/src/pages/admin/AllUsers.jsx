@@ -13,7 +13,7 @@ const AllUsers = () => {
   const getUsers = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:8000/api/user/getAllUsers?searchTerm=${search}`);
+      const res = await fetch(`http://localhost:8000/api/user/getAllUsers`);
       const data = await res.json();
 
       if (data && data?.success === false) {

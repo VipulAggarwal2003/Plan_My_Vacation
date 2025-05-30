@@ -108,6 +108,7 @@ export const getAllBookings = async (req, res) => {
       })
       .sort({ createdAt: "asc" });
     let bookingsFilterd = [];
+    console.log(bookings);
     bookings.map((booking) => {
       if (booking.buyer !== null) {
         bookingsFilterd.push(booking);

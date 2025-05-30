@@ -38,7 +38,7 @@ const Booking = () => {
     date: null,
   });
   const [clientToken, setClientToken] = useState("");
-  const [instance, setInstance] = useState("");
+  const [instance, setInstance] = useState(null);
   const [currentDate, setCurrentDate] = useState("");
 
   const getPackageData = async () => {
@@ -76,18 +76,19 @@ const Booking = () => {
     }
   };
 
-  //get paymentgateway token
-  // const getToken = async () => {
-  //   try {
-  //     const { data } = await axios.get(`http://localhost:8000/api/package/braintree/token`);
-  //     setClientToken(data?.clientToken);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   getToken();
-  // }, [currentUser]);
+  // get paymentgateway token
+  const getToken = async () => {
+    try {
+      const { data } = await axios.get(`http://localhost:8000/api/package/braintree/token`);
+      console.log(data?.clientToken);
+      setClientToken(data?.clientToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getToken();
+  }, [currentUser]);
 
   //handle payment & book package
   const handleBookPackage = async () => {
@@ -244,7 +245,7 @@ const Booking = () => {
                   )}
                 </div>
               </div>
-              <div className="flex flex-col my-1">
+              <div className="flex flex-col my-1 mx-auto w-1/2 bg-gray-100 p-3">
                 <label className="font-semibold" htmlFor="date">
                   Select Date:
                 </label>
@@ -260,7 +261,7 @@ const Booking = () => {
                 />
               </div>
               {/* price */}
-              <p className="flex gap-1 text-xl font-semibold my-1">
+              <p className="flex gap-1 text-xl font-semibold my-1 mx-auto w-1/2 bg-gray-100 p-3">
                 Price:
                 {packageData.packageOffer ? (
                   <>
@@ -268,7 +269,7 @@ const Booking = () => {
                       Rs.{packageData.packagePrice}
                     </span>{" "}
                     -<span>Rs.{packageData.packageDiscountPrice}</span>
-                    <span className="text-lg ml-2 bg-green-700 p-1 rounded text-white">
+                    <span className="text-lg ml-2 bg-green-700 p-1 rounded text-white ">
                       {Math.floor(
                         ((+packageData.packagePrice -
                           +packageData.packageDiscountPrice) /
@@ -285,9 +286,9 @@ const Booking = () => {
                 )}
               </p>
               {/* price */}
-              <div className="flex border-2 w-max">
+              <div className="flex border-2 mx-auto w-1/2 bg-gray-100 p-3">
                 <button
-                  className="p-2 py-1 font-semibold"
+                  className="p-3 py-1 font-semibold mx-auto w-1/2 bg-gray-100"
                   onClick={() => {
                     if (bookingData.persons > 1) {
                       setBookingData({
@@ -307,10 +308,10 @@ const Booking = () => {
                   value={bookingData.persons}
                   disabled
                   type="text"
-                  className="border w-10 text-center text-lg"
+                  className="border w-10 text-center text-lg "
                 />
                 <button
-                  className="p-2 py-1 font-semibold"
+                  className="py-1 font-semibold mx-auto w-1/2 bg-gray-100 p-3"
                   onClick={() => {
                     if (bookingData.persons < 10) {
                       setBookingData({
@@ -327,7 +328,7 @@ const Booking = () => {
                   +
                 </button>
               </div>
-              <p className="text-xl font-semibold">
+              <p className="text-xl font-semibold mt-5 mx-auto w-1/2 bg-gray-100 p-4">
                 Total Price:
                 <span className="text-green-700">
                   Rs.
@@ -336,8 +337,8 @@ const Booking = () => {
                     : packageData.packagePrice * bookingData.persons}
                 </span>
               </p>
-              <div className="my-2 max-w-[300px] gap-1">
-                {/* <p
+              <div className="my-2  gap-1 mx-auto w-2/5 bg-gray-100 p-4">
+                <p
                   className={`font-semibold ${
                     instance && "text-red-700 text-sm"
                   }`}
@@ -346,16 +347,8 @@ const Booking = () => {
                   {!instance
                     ? "Loading..."
                     : "Don't use your original card details!(This is not the production build)"}
-                </p> */}
-                 <button
-                      className="p-2 rounded bg-blue-600 text-white payment-btn disabled:optional:80 hover:opacity-95 cursor-pointer"
-                      onClick={handleBookPackage}
-                     // disabled={loading || !instance || !currentUser?.address}
-                    >
-                     Book Now
-                      {/* {loading ? "Processing..." : "Book Now"} */}
-                    </button>
-                {/* {clientToken && (
+                </p>
+                    {clientToken && (
                   <>
                     <DropIn
                       options={{
@@ -368,7 +361,16 @@ const Booking = () => {
                     />
                    
                   </>
-                )} */}
+                )}
+                 <button
+                      className="p-2 rounded bg-blue-600 text-white payment-btn disabled:optional:80 hover:opacity-95 cursor-pointer"
+                      onClick={handleBookPackage}
+                      disabled={loading || !instance || !currentUser?.address}
+                    >
+                     
+                    { loading ? "Processing..." : "Book Now" }
+                    </button>
+             
               </div>
             </div>
           </div>

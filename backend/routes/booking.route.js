@@ -19,7 +19,7 @@ router.post("/book-package/:packageId", requireSignIn, bookPackage);
 router.get("/get-currentBookings", requireSignIn, isAdmin, getCurrentBookings);
 
 //get all bookings admin
-router.get("/get-allBookings", requireSignIn, isAdmin, getAllBookings);
+router.get("/get-allBookings", isAdmin, getAllBookings);
 
 //get all current bookings by user id
 router.get(

@@ -10,6 +10,8 @@ import dotenv from "dotenv";
 import path from "path";
 import cors from "cors";
 import multer from "multer";
+import { getAllUsers } from "./controllers/user.controller.js";
+import { getAllBookings } from "./controllers/booking.controller.js";
 const app = express();
 dotenv.config();
 
@@ -41,6 +43,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
+app.get("/api/booking/get-allBookings",getAllBookings);
 app.use("/api/package", packageRoute);
 app.use("/api/rating", ratingRoute);
 app.use("/api/booking", bookingRoute);

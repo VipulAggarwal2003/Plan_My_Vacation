@@ -35,7 +35,7 @@ router.post("/update-password/:id", requireSignIn, updateUserPassword);
 router.delete("/delete/:id", requireSignIn, deleteUserAccount);
 
 //get all users
-router.get("/getAllUsers", requireSignIn, isAdmin, getAllUsers);
+router.get("/getAllUsers", getAllUsers);
 
 //admin delete user accounts
 router.delete(

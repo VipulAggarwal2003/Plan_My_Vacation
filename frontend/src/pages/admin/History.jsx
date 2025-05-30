@@ -15,7 +15,7 @@ const History = () => {
     try {
       setLoading(true);
       const res = await fetch(
-        `http://localhost:8000/api/booking/get-allBookings?searchTerm=${search}`
+        `http://localhost:8000/api/booking/get-allBookings`
       );
       const data = await res.json();
       if (data?.success) {

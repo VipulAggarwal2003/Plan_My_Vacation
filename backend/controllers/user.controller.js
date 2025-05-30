@@ -169,15 +169,18 @@ export const deleteUserAccount = async (req, res, next) => {
 //get all users admin
 export const getAllUsers = async (req, res) => {
   try {
-    const searchTerm = req.query.searchTerm || "";
-    const users = await User.find({
-      user_role: 0,
-      $or: [
-        { username: { $regex: searchTerm, $options: "i" } },
-        { email: { $regex: searchTerm, $options: "i" } },
-        { phone: { $regex: searchTerm, $options: "i" } },
-      ],
-    });
+    //const searchTerm = req.query.searchTerm || "";
+    // const users = await User.find({}
+    //   // user_role: 0,
+    //   // //  $or: [
+    //   // //   { username: { $regex: searchTerm, $options: "i" } },
+    //   // //   { email: { $regex: searchTerm, $options: "i" } },
+    //   // //   { phone: { $regex: searchTerm, $options: "i" } },
+    //   // // ],
+    // );
+    console.log("getall api called");
+    const users = await User.find({user_role :0});
+    console.log(users);
     if (users && users.length > 0) {
       res.send(users);
     } else {
