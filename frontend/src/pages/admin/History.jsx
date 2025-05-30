@@ -98,7 +98,7 @@ const History = () => {
                 <p>{booking?.buyer?.username}</p>
                 <p>{booking?.buyer?.email}</p>
                 <p>{booking?.date}</p>
-                {(new Date(booking?.date).getTime() < new Date().getTime() ||
+                {/* {(new Date(booking?.date).getTime() < new Date().getTime() ||
                   booking?.status === "Cancelled") && (
                   <button
                     onClick={() => {
@@ -108,7 +108,7 @@ const History = () => {
                   >
                     Delete
                   </button>
-                )}
+                )} */}
               </div>
             );
           })}
